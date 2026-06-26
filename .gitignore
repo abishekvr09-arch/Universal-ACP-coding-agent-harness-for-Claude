@@ -1,0 +1,29 @@
+# python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+build/
+
+# runtime state — SQLite session/ledger stores (NOT source; harness.db holds message logs)
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# node (the OpenClaw adapter) — also covered by adapters/openclaw/.gitignore
+node_modules/
+dist/
+
+# local / editor / OS
+.claude/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# secrets (none live here, but never let one slip in)
+.env
+*.token.json

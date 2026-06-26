@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+# Distribution name (PyPI). The IMPORT package stays `harness` (src/harness); the
+# OpenClaw adapter spawns `python -m harness.acp.server`. Availability of this name on
+# PyPI must be confirmed at publish time (deferred external check, like the API key).
+name = "claude-harness-acp"
+version = "0.0.1"
+description = "A universal ACP coding agent — a Claude-first tool-calling loop any ACP host can drive (and you can embed)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "abishekvr09" }]
+keywords = [
+    "agent", "llm", "claude", "anthropic", "coding-agent", "tool-calling",
+    "acp", "agent-client-protocol", "acp-agent", "mcp", "openclaw",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+
+# [project.urls]
+# TODO(publish): set to the public GitHub repo before PyPI/ClawHub publish (ClawHub requires a
+# public repo). Don't ship a guessed URL — fill these in at publish time, with the key + dist-name check.
+# Homepage = "https://github.com/<owner>/<repo>"
+# Repository = "https://github.com/<owner>/<repo>"
+
+dependencies = [
+    "anthropic>=0.40",
+]
+
+[project.optional-dependencies]
+acp = ["agent-client-protocol>=0.10"]
+dev = ["pytest>=8", "pytest-cov>=5", "agent-client-protocol>=0.10"]
+
+[project.scripts]
+harness = "harness.cli:main"
+harness-acp = "harness.acp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/harness"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

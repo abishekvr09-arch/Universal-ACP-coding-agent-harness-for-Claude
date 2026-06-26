@@ -1,0 +1,35 @@
+{
+  "id": "harness-acp",
+  "name": "Harness (ACP)",
+  "description": "Runs the standalone Python harness as an ACP subprocess via an OpenClaw AgentHarness.",
+  "version": "0.1.0",
+  "activation": {
+    "onStartup": false,
+    "onAgentHarnesses": ["harness-acp"]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "pythonPath": {
+        "type": "string"
+      },
+      "allowGatedTools": {
+        "type": "boolean",
+        "default": false
+      }
+    }
+  },
+  "uiHints": {
+    "pythonPath": {
+      "label": "Python executable",
+      "help": "Path to the Python that runs harness-acp. Leave unset to resolve from OPENCLAW_HARNESS_PYTHON / PATH.",
+      "placeholder": "C:\\path\\to\\.venv\\Scripts\\python.exe"
+    },
+    "allowGatedTools": {
+      "label": "Allow approval-gated tools",
+      "help": "When off (default), tools that require approval are denied in this headless embedded context. Turn on only if you accept the harness running gated tools without an interactive prompt.",
+      "advanced": true
+    }
+  }
+}

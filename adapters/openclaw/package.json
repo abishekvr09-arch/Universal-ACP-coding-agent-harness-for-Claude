@@ -1,0 +1,39 @@
+{
+  "name": "openclaw-harness-acp",
+  "version": "0.1.0",
+  "description": "OpenClaw AgentHarness that runs the Python harness as an ACP subprocess.",
+  "type": "module",
+  "files": [
+    "dist",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.6.10",
+      "minGatewayVersion": "2026.6.10"
+    },
+    "build": {
+      "openclawVersion": "2026.6.10"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.6.10"
+  },
+  "dependencies": {
+    "@agentclientprotocol/sdk": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "openclaw": "2026.6.10",
+    "typescript": "^5.6.0"
+  }
+}
