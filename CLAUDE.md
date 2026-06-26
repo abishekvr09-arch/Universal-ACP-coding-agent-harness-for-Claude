@@ -562,8 +562,7 @@ defined). Optional Gemini cross-reference is a sanity check, not a blocker.
     guarantee). `apply_cache_breakpoints` remains the pure (deepcopying) variant for
     callers that don't own an isolated list. Empirically audited (7/7 cache-stability
     probes; the prior in-place-leak finding is now closed) and guarded by
-    `tests/test_cache_stability.py`. (Origin: learning-log L8 — elevated from a
-    documented contract to a runtime invariant.)
+    `tests/test_cache_stability.py`.
 18. **The tool_result invariant survives a crash/restart (cross-turn reconciliation).**
     The in-turn invariant (one `tool_result` per `tool_use`) only spans ONE turn — and
     a turn is two separate writes (the assistant `tool_use` turn is persisted BEFORE
@@ -576,7 +575,7 @@ defined). Optional Gemini cross-reference is a sanity check, not a blocker.
     `tool_use` blocks are never re-run), preserves role alternation (fold-into-next-user,
     not a second user turn), and the reconciled turn is persisted in final form
     (append-only). Guarded by `tests/test_hardening_resume.py` +
-    `tests/test_hardening_acp_recovery.py`. (Origin: learning-log L9.)
+    `tests/test_hardening_acp_recovery.py`.
 19. **Persistence fails closed; recovery is store-backed.** A write failure surfaces
     (the store never silently swallows — `tests/test_hardening_resume.py`), single-row
     writes are atomic (no partial state), and persist-before-append/execute (Gotcha 2)
@@ -610,9 +609,3 @@ defined). Optional Gemini cross-reference is a sanity check, not a blocker.
     `tests/test_hardening_lifecycle.py` (7 lifecycle faults + 5 resolve/CLI-wiring +
     serial-isolation fail-stop) + the ACP-wiring test in `test_hardening_acp_recovery.py`
     + `test_invariant.py`.
-
-## Research sources
-
-Full strip-down findings live in memory (not in this repo):
-- `openclaw-architecture-map.md` — all 4 sections complete
-- `openclaw-better-harness.md` — strategic decisions + comparative analysis
